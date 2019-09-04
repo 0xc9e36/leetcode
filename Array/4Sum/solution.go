@@ -1,18 +1,14 @@
-package main
+package _Sum
 
-import (
-	"fmt"
-	"sort"
-)
-
-func main() {
-	r := fourSum([]int{-3,-2,-1,0,0,1,2,3}, 0)
-	fmt.Println(r)
-}
+import "sort"
 
 func fourSum(nums []int, target int) [][]int {
 	l, result := len(nums), [][]int{}
+
+	// sort
 	sort.Ints(nums)
+
+	//先排序，再固定两个数, 然后头尾指针扫描剩下的元素
 	for i := 0; i < l - 3; i++ {
 		if i != 0 && nums[i] == nums[i-1] {
 			continue
