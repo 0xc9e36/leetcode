@@ -1,16 +1,6 @@
-package main
+package NextPermutation
 
-import (
-	"fmt"
-	"sort"
-)
-
-func main() {
-	r := []int{2, 5, 3, 1}
-	nextPermutation(r)
-	fmt.Println(r)
-}
-
+import "sort"
 
 func nextPermutation(nums []int)  {
 
