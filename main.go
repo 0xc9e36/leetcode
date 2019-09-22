@@ -1,52 +1,47 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
-
 func main() {
-	r := []int{2, 5, 3, 1}
-	nextPermutation(r)
-	fmt.Println(r)
+	r := []int{5,7,7,8,8,10}
+	searchRange(r, 8)
 }
 
+//5,7,7,8,8,10
+//8
 
-func nextPermutation(nums []int)  {
+func searchRange(nums []int, target int) []int {
 
-	j, l := len(nums) - 1, len(nums) - 1
-
-	if l <= 0 {
-		return
+	lo, hi := 0, len(nums) - 1
+	res := make([]int ,2)
+	res[0], res[1] = -1, -1
+	if hi < lo {
+		return res
 	}
 
-	//最后两位从大到小排列  ... 1 5, 直接交换
-	if nums[j] > nums[j - 1] {
-		nums[j], nums[j - 1] = nums[j - 1], nums[j]
-		return
-	}
-
-	for j >= 1 && nums[j] <= nums[j - 1] {
-		j--
-	}
-
-	//从大到小排列  5 4 3 2 1 ==>  1 2 3 4 5
-	if j == 0 {
-		sort.Ints(nums)
-		return
-	}
-
-
-	//2 5 3 1   找出右边最接近 j - 1号元素交换
-	k := l
-	for ; k >= j + 1; k-- {
-		if nums[k] > nums[j - 1] {
-			break
+	// left
+	//
+	for lo <= hi {
+		mid := lo + (hi - lo) / 2
+		if target > nums[mid] {
+			lo = mid + 1
+		} else {
+			hi = mid
 		}
 	}
-	nums[j - 1], nums[k] = nums[k], nums[j - 1]
+	if hi == len(nums) - 1 || nums[hi] != target {
+		return res
+	}
 
-	sort.Ints(nums[j:])
+	res[0] = hi
+	hi = len(nums) - 1
 
-	return
-}
+	for lo <= hi {
+		mid := lo + (hi - lo) / 2
+		if target >= nums[mid] {
+			lo = mid + 1
+		} else {
+			hi = mid
+		}
+	}
+	res[1] = hi - 1
+	return res
+ }
