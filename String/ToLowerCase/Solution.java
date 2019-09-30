@@ -13,3 +13,15 @@ public class Solution {
         return sb.toString();
     }
 }
+
+func toLowerCase(str string) string {
+    res := ""
+    for i := range str {
+        c := str[i]
+        if c >= 'A' && c<= 'Z' {
+            c += 32
+        }
+        res += string(c)
+    }
+    return res
+}
