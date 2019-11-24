@@ -6,7 +6,7 @@
  * @Date: 2019-11-24 12:34
  */
 
-package ImplementStackusingQueues
+package ImplementStackusingQueuescc
 
 type MyStack struct {
 	queue1, queue2 []int
