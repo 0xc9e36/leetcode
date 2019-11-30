@@ -74,3 +74,40 @@ package implementStrstr
 //	}
 //	return -1
 //}
+
+
+
+// bm 算法, 坏前缀
+func skipTable(p string) [256]int {
+	l := len(p)
+	tab := [256]int{}
+	for i := 0; i < 256; i++ {
+		tab[i] = -1
+	}
+	for i := 0; i < l; i++ {
+		tab[p[i]] = i
+	}
+	return tab
+}
+
+func strStr(haystack string, needle string) int {
+	m, n := len(haystack), len(needle)
+	tab := skipTable(needle)
+	var skip int
+	for i := 0; i <= m - n; i++ {
+		skip = 0
+		for j := n - 1; j >= 0; j-- {
+			if haystack[i + j] != needle[j] {
+				skip = j - tab[haystack[i + j]]
+				if skip < 0 {
+					skip = 1
+				}
+				break
+			}
+		}
+		if skip == 0 {
+			return i
+		}
+	}
+	return -1
+}
