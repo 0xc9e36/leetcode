@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
-
+func f() bool { return false }
 func main() {
-	var b byte = '0'
-	fmt.Println(b=='0')
-
+	switch f()
+	{
+	case true:
+		println(true)
+	case false:
+		println(false)
+	}
 }
