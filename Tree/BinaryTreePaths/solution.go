@@ -8,7 +8,7 @@
 
 package BinaryTreePaths
 
-
+import "fmt"
 
 /**
  * Definition for a binary tree node.
@@ -18,34 +18,26 @@ package BinaryTreePaths
  *     Right *TreeNode
  * }
  */
-func levelOrder(root *TreeNode) [][]int {
-
-	res := make([][]int, 0)
-
+func binaryTreePaths(root *TreeNode) []string {
 	if root == nil {
-		return res
+		return []string{}
 	}
 
-	queue := make([]*TreeNode, 0)
-	queue = append(queue, root)
-	for len(queue) != 0 {
-		tmp := []int{}
-		l := len(queue)
-		for i := 0; i < l; i++ {
-			node := queue[0]
-			queue = queue[1:]
-			tmp = append(tmp, node.Val)
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
-		}
-		res = append(res, tmp)
-
+	if root.Left == nil && root.Right == nil {
+		return []string{fmt.Sprintf("%d", root.Val)}
 	}
 
+	l := binaryTreePaths(root.Left)
+	r := binaryTreePaths(root.Right)
 
+	for i := 0; i < len(l); i++ {
+		l[i] = fmt.Sprintf("%d->%s", root.Val, l[i])
+	}
+
+	for i := 0; i < len(r); i++ {
+		r[i] = fmt.Sprintf("%d->%s", root.Val, r[i])
+	}
+
+	res := append(l, r...)
 	return res
 }

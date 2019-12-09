@@ -1,12 +1,12 @@
 package main
 
-func f() bool { return false }
+import (
+	"sort"
+)
+
 func main() {
-	switch f()
-	{
-	case true:
-		println(true)
-	case false:
-		println(false)
-	}
+	nums := []int{}
+	sort.Slice(nums, func(i, j int) bool {
+		return  nums[i] < nums[j]
+	})
 }
