@@ -1,12 +1,10 @@
 package main
 
-import (
-	"sort"
-)
+import "fmt"
 
 func main() {
-	nums := []int{}
-	sort.Slice(nums, func(i, j int) bool {
-		return  nums[i] < nums[j]
-	})
+	l := -1
+	for i := 1; i < l; i--  {
+		fmt.Println(i)
+	}
 }

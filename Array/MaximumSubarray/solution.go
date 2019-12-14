@@ -8,33 +8,26 @@
 
 package MaximumSubarray
 
-//[-2,1,-3,4,-1,2,1,-5,4]
-//[0, 3, -4, 7, -5, 3, -1, -6, 9]
 func maxSubArray(nums []int) int {
 	l := len(nums)
-
 	if l == 0 {
 		return 0
 	}
-	dp := make([]int, l)
 
+	//滚动数组
+	dp := make([]int, 2)
 	dp[0] = nums[0]
-	res := dp[0]
-
+	ans := nums[0]
 	for i := 1; i < l; i++ {
-		if dp[i - 1] > 0 {
-			dp[i] = dp[i - 1] + nums[i]
-		} else {
-			dp[i] = nums[i]
-		}
-		res = max(res, dp[i])
+		dp[i%2] = max(dp[(i - 1) % 2] + nums[i], nums[i])
+		ans = max(dp[i % 2], ans)
 	}
-	return res
+	return ans
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
+func max(i, j int) int {
+	if i > j {
+		return i
 	}
-	return b
+	return j
 }
